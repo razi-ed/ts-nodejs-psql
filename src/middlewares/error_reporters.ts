@@ -1,6 +1,8 @@
 import { Response, NextFunction } from "express";
 import { HTTPClientError, HTTP404Error } from "../utils/http_errors";
 
+//! SentryJS or some error tracking modules to be implemented
+
 export const notFoundError = () => {
   throw new HTTP404Error("Method not found.");
 };
