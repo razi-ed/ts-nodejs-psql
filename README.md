@@ -1,1 +1,1 @@
-# ts_nodejs_psql
+# TS-Node-PSQL
