@@ -1,15 +1,18 @@
 import http from "http";
-import express from "express";
-import { ApplyMiddleware } from "./utils/apply_middlewares";
-import { ApplyRoutes } from "./utils/apply_routes";
-import Middleware from "./middleware";
-import Routes from './routes'
+import Router from './utils/express_app'
 
-const router = express();
-ApplyMiddleware( Middleware, router );
-ApplyRoutes( Routes, router )
+process.on("uncaughtException", e => {
+  console.log(e);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", e => {
+  console.log(e);
+  process.exit(1);
+});
+
 const { PORT = 3000 } = process.env;
-const server = http.createServer( router );
+const server = http.createServer( Router );
 
 server.listen(PORT, () =>
   console.log( `Server is running http://localhost:${ PORT }` )

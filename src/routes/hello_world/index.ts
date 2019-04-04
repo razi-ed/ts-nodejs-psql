@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import HelloWorldService from '../../services/hello_world'
+import HelloWorldService from '../../controllers/hello_world'
 
 //! write type for 'Routes'
 const Routes = [
