@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 
-import HelloWorldService from '../../controllers/hello_world'
-import { ValidateGreetingQueryParams } from "../../middlewares/request_validations";
+import HelloWorldService, { Greeting } from '../../controllers/hello_world'
+import {
+  ValidateGreetingQueryParams,
+  ValidateGreetingParams,
+  ValidateBodyName
+} from "../../middlewares/request_validations";
 
 //! write types to *.type.d files
 type Handler = (
@@ -18,25 +22,48 @@ type Route = {
 
 const Routes: Route[] = [
   {
-    path: "/",
+    path: "/api/v1",
     method: "get",
-    handler: async (req: Request, res: Response) => {
-      const response = HelloWorldService();
-      res.send( response );
-    }
-  },
-  {
-    path: "/greeting",
-    method: "get",
-    handler:[
-      ValidateGreetingQueryParams,
+    handler: [
       async (req: Request, res: Response) => {
         const response = HelloWorldService();
-        res.send( response );
+        res.send(response);
       }
     ]
   },
-
+  {
+    path: "/api/v1",
+    method: "post",
+    handler:[
+      ValidateBodyName,
+      async (req: Request, res: Response) => {
+        const response = Greeting( req.body.name );;
+        res.send(response);
+      }
+    ]
+  },
+  {
+    path: "/api/v1/greeting",
+    method: "get",
+    handler: [
+      ValidateGreetingQueryParams,
+      async (req: Request, res: Response) => {
+        const response = Greeting( req.query.name );
+        res.send(response);
+      }
+    ]
+  },
+  {
+    path: "/api/v1/greeting/:adjective",
+    method: "get",
+    handler: [
+      ValidateGreetingParams,
+      async (req: Request, res: Response) => {
+        const response = Greeting( req.params.adjective );
+        res.send(response);
+      }
+    ]
+  }
 ];
 
 export default Routes;

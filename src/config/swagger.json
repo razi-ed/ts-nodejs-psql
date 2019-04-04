@@ -1,0 +1,117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Hello World"
+        ],
+        "summary": "Displays -Hello World- message",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      },
+      "post": {
+        "tags": [
+          "Hello {Name}"
+        ],
+        "summary": "Displays -Hello {Name}- message",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request, missing request body"
+          }
+        },
+        "content": {
+          "application/json": {}
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "description": "Specifies the name",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/greeting": {
+      "get": {
+        "tags": [
+          "Greeting"
+        ],
+        "summary": "Displays greeting with name",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Missing name parameter"
+          }
+        },
+        "content": {
+          "application/json": {}
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Specifies the name",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/greeting/:adjective": {
+      "get": {
+        "tags": [
+          "Greeting"
+        ],
+        "summary": "Displays greeting with adjective",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Missing adjective parameter"
+          }
+        },
+        "content": {
+          "application/json": {}
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "params",
+            "description": "Specifies the adjective",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
+}

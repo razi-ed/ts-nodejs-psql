@@ -3,6 +3,8 @@ import Cors from "cors";
 import Parser from "body-parser";
 import Compression from "compression";
 
+import ApiDocs from '../middlewares/api_docs'
+
 export const HandleCors = (router: Router) =>
   router.use(Cors({ credentials: true, origin: true }));
 
@@ -18,5 +20,6 @@ export const HandleCompression = (router: Router) => {
 export default [
   HandleCors,
   HandleBodyRequestParsing,
-  HandleCompression
+  HandleCompression,
+  ApiDocs
 ];
